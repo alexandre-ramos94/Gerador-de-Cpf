@@ -2,6 +2,24 @@ from random import randint
 from tkinter import *
 
 
+def iguais(lst, lb):
+    ok = False
+    cont = 1
+    for c in range(0, len(lst) - 1):
+        if lst[c] == lst[cont]:
+            ok = True
+            cont += 1
+        else:
+            ok = False
+            break
+    print(lst)
+    if ok:
+        lb['text'] = 'Um cpf com todos os números iguais não é válido, tente novamente'
+    else:
+        pass
+    return ok
+
+
 def personaliza():
     global lb
     try:
@@ -29,29 +47,33 @@ def verifica():
             nb = cp[9]
             for c in cp:
                 teste.append(int(c))
-            for k in range(10, 1, -1):
-                x += k * int(teste[tot])
-                tot += 1
-            if x % 11 == 0 or x % 11 == 1 and nb == 0 or int(nb) == (11 - (x % 11)):
-               tot = x = 0
-               nb2 = cp[10]
-               for c in range(11, 1, -1):
-                   x += c * teste[tot]
-                   tot += 1
-               if x % 11 == 0 or x % 11 == 1 and nb2 == 0 or int(nb2) == (11 - (x % 11)):
-                   for c in teste:
-                       p += 1
-                       if p == 3 or p == 6:
-                           lb['text'] += f'{str(c)}.'
-                       elif p == 9:
-                           lb['text'] += f'{str(c)}-'
-                       else:
-                           lb['text'] += f'{str(c)}'
-                   lb['text'] += f': CPF Válido'
-               else:
-                   lb['text'] = 'CPF inválido'
+            veri = iguais(teste, lb)
+            if not veri:
+                for k in range(10, 1, -1):
+                    x += k * int(teste[tot])
+                    tot += 1
+                if x % 11 == 0 or x % 11 == 1 and nb == 0 or int(nb) == (11 - (x % 11)):
+                   tot = x = 0
+                   nb2 = cp[10]
+                   for c in range(11, 1, -1):
+                       x += c * teste[tot]
+                       tot += 1
+                   if x % 11 == 0 or x % 11 == 1 and nb2 == 0 or int(nb2) == (11 - (x % 11)):
+                       for c in teste:
+                           p += 1
+                           if p == 3 or p == 6:
+                               lb['text'] += f'{str(c)}.'
+                           elif p == 9:
+                               lb['text'] += f'{str(c)}-'
+                           else:
+                               lb['text'] += f'{str(c)}'
+                       lb['text'] += f': CPF Válido'
+                   else:
+                       lb['text'] = 'CPF inválido'
+                else:
+                    lb['text'] = 'CPF inválido'
             else:
-                lb['text'] = 'CPF inválido'
+                pass
         else:
             lb['text'] = 'Um numéro de cpf válido deve conter 11 numeros'
     except:
@@ -91,7 +113,11 @@ def pridig(lst, lb):
         lst.append(0)
     else:
         lst.append(11 - (k % 11))
-    mostra(lst, lb)
+    veri = iguais(lst, lb)
+    if not veri:
+        mostra(lst, lb)
+
+
 
 
 def mostra(lst, lb):
