@@ -12,7 +12,6 @@ def iguais(lst, lb):
         else:
             ok = False
             break
-    print(lst)
     if ok:
         lb['text'] = 'Um cpf com todos os números iguais não é válido, tente novamente'
     else:
@@ -118,8 +117,6 @@ def pridig(lst, lb):
         mostra(lst, lb)
 
 
-
-
 def mostra(lst, lb):
     lb['text'] = ''
     """Esta função mostra o numero final do cpf já formatado"""
@@ -149,6 +146,8 @@ bt3 = Button(janela, width=20, text='Gerar cpf personalizado', command=personali
 bt3.pack()
 ed2 = Entry(janela, width=23)
 ed2.pack()
+lb3 = Label(janela, text="Digite 9 números válidos para gerar um cpf personalizado")
+lb3.pack()
 
 
 janela.mainloop()
