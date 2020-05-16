@@ -7,7 +7,7 @@ def verifica():
     global lb
     try:
         lb['text'] = ''
-        tot = x = 0
+        tot = x = p =0
         teste = list()
         cp = str(ed.get().replace('.', '').replace('-', ''))
         if len(cp) < 12:
@@ -24,7 +24,15 @@ def verifica():
                    x += c * teste[tot]
                    tot += 1
                if x % 11 == 0 or x % 11 == 1 and nb2 == 0 or int(nb2) == (11 - (x % 11)):
-                   lb['text'] = f'{cp}: CPF válido'
+                   for c in teste:
+                       p += 1
+                       if p == 3 or p == 6:
+                           lb['text'] += f'{str(c)}.'
+                       elif p == 9:
+                           lb['text'] += f'{str(c)}-'
+                       else:
+                           lb['text'] += f'{str(c)}'
+                   lb['text'] += f': CPF Válido'
                else:
                    lb['text'] = 'CPF inválido'
             else:
