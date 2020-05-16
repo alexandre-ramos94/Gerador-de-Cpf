@@ -10,24 +10,27 @@ def verifica():
         tot = x = 0
         teste = list()
         cp = str(ed.get().replace('.', '').replace('-', ''))
-        nb = cp[9]
-        for c in cp:
-            teste.append(int(c))
-        for k in range(10, 1, -1):
-            x += k * int(teste[tot])
-            tot += 1
-        if x % 11 == 0 or x % 11 == 1 and nb == 0 or int(nb) == (11 - (x % 11)):
-           tot = x = 0
-           nb2 = cp[10]
-           for c in range(11, 1, -1):
-               x += c * teste[tot]
-               tot += 1
-           if x % 11 == 0 or x % 11 == 1 and nb2 == 0 or int(nb2) == (11 - (x % 11)):
-               lb['text'] = 'CPF válido'
-           else:
-               lb['text'] = 'CPF inválido'
+        if len(cp) < 12:
+            nb = cp[9]
+            for c in cp:
+                teste.append(int(c))
+            for k in range(10, 1, -1):
+                x += k * int(teste[tot])
+                tot += 1
+            if x % 11 == 0 or x % 11 == 1 and nb == 0 or int(nb) == (11 - (x % 11)):
+               tot = x = 0
+               nb2 = cp[10]
+               for c in range(11, 1, -1):
+                   x += c * teste[tot]
+                   tot += 1
+               if x % 11 == 0 or x % 11 == 1 and nb2 == 0 or int(nb2) == (11 - (x % 11)):
+                   lb['text'] = f'{cp}: CPF válido'
+               else:
+                   lb['text'] = 'CPF inválido'
+            else:
+                lb['text'] = 'CPF inválido'
         else:
-            lb['text'] = 'CPF inválido'
+            lb['text'] = 'Um numéro de cpf válido deve conter 11 numeros'
     except:
         lb['text'] = 'Houve algum problema com os dados, verifique-os e tente novamente'
 
