@@ -30,7 +30,7 @@ def personaliza():
             pridig(pers, lb)
         else:
             lb['text'] = 'Por favor digite apenas 9 números válidos'
-    except:
+    except (ValueError, TypeError):
         lb['text'] = 'Houve problemas com os dados, digite 9 numeros válidos'
 
 
@@ -75,8 +75,10 @@ def verifica():
                 pass
         else:
             lb['text'] = 'Um numéro de cpf válido deve conter 11 numeros'
-    except:
+    except (TypeError, ValueError):
         lb['text'] = 'Houve algum problema com os dados, verifique-os e tente novamente'
+    except (KeyboardInterrupt, IndexError):
+        print('Problema com a quantidade de dados inseridos')
 
 
 def gerador():
@@ -148,8 +150,7 @@ ed2 = Entry(janela, width=23)
 ed2.pack()
 lb3 = Label(janela, text="Digite 9 números válidos para gerar um cpf personalizado")
 lb3.pack()
-
-
+# Loop principal
 janela.mainloop()
 
 
