@@ -2,6 +2,21 @@ from random import randint
 from tkinter import *
 
 
+def personaliza():
+    global lb
+    try:
+        pers = list()
+        cp = ed2.get().replace('.', '').strip().replace(' ', '')
+        if len(cp) == 9:
+            for c in cp:
+                pers.append(int(c))
+            pridig(pers, lb)
+        else:
+            lb['text'] = 'Por favor digite apenas 9 números válidos'
+    except:
+        lb['text'] = 'Houve problemas com os dados, digite 9 numeros válidos'
+
+
 def verifica():
     """Esta função irá verificar a validade de um número de cpf baseado em principios matemáticos"""
     global lb
@@ -9,7 +24,7 @@ def verifica():
         lb['text'] = ''
         tot = x = p =0
         teste = list()
-        cp = str(ed.get().replace('.', '').replace('-', ''))
+        cp = str(ed.get().replace('.', '').replace('-', '').strip().replace(' ', ''))
         if len(cp) < 12:
             nb = cp[9]
             for c in cp:
@@ -91,6 +106,7 @@ def mostra(lst, lb):
             lb['text'] += f'{v}'
     lst.clear()
 
+
 # Interface grafica básica usando o Tkinter
 janela = Tk()
 janela.title('Gerador de cpf')
@@ -103,6 +119,11 @@ bt2 = Button(janela, width=20, text="Verificar nº de cpf", command=verifica)
 bt2.pack()
 ed = Entry(janela, width=23)
 ed.pack()
+bt3 = Button(janela, width=20, text='Gerar cpf personalizado', command=personaliza)
+bt3.pack()
+ed2 = Entry(janela, width=23)
+ed2.pack()
+
 
 janela.mainloop()
 
