@@ -1,5 +1,6 @@
 from random import randint
 from tkinter import *
+import os
 
 
 def iguais(lst, lb):
@@ -152,6 +153,7 @@ lb3 = Label(janela, text="Digite 9 números válidos para gerar um cpf personali
 lb3.pack()
 # Loop principal
 janela.mainloop()
+
 
 
 
